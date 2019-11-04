@@ -109,8 +109,24 @@ var UIController = ( function(){
 
             // Make necessary changes to the UI
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
+        },
 
+        clearFields: function(){
+            var fields, fieldsArray;
 
+            fields = document.querySelectorAll(DOMstrings.inputDescription + ', ' + DOMstrings.inputValue);
+            fieldsArray = Array.prototype.slice.call(fields);
+            fieldsArray.forEach(function(current, index, array){
+                current.value = "";
+            });
+
+            fieldsArray[0].focus();
+
+            // fields.forEach(function(current, index, array){
+            //     current.value = "";
+            // })
+
+            // fields[0].focus();
         },
 
         getDOMstrings: function(){
@@ -147,9 +163,12 @@ var controller = ( function(budgetCtrl, UICtrl){
         // 3. Add item to the UI
         UICtrl.addNewItem(newItem, input.type);
 
-        // 4. Calculate the budget
+        // 4. Clear input fields
+        UICtrl.clearFields();
 
-        // 5. Display budget to the UI
+        // 5. Calculate the budget
+
+        // 6. Display budget to the UI
     }
 
     return {
